@@ -1,0 +1,133 @@
+/* GamePage.css */
+/* /game_select 페이지 UI 디자인 | 2024.11.09 리듬게임 전용 음악 선택 페이지 .css 파일 추가 */
+/* 기본적인 스타일은 SelectPage.css와 동일하게 유지 */
+@import "./default.css";
+
+/* 페이지 전체 스타일 옵션 */
+.gamepage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7e1f2;
+  padding: 20px;
+}
+
+/* 왼쪽 영역 옵션 : 선택된 노래 제목 & 앨범 커버 이미지 */
+.gamepage_left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 50px; /* 왼쪽 벽에서 얼마나 떨어져있는지... */
+  margin-top: -70px; /* 위쪽 천장에서 얼마나 떨어져있는지... */
+}
+
+/* 노래 타이틀 옵션 */
+.gamepage_songtitle {
+  font-size: 30px;
+  font-weight: bold;
+  color: #776180;
+  margin-bottom: 25px;
+}
+
+/* 앨범 커버 이미지 스타일 옵션 */
+.gamepage_albumcover {
+  width: 300px; /* 이미지 크기 */
+  height: auto;
+  border-radius: 10px; /* 이미지 모서리를 둥글게 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  margin-bottom: 30px; /* 추가된 부분: 이미지의 아래 여백을 줄일 수 있음 */
+  //border: 5px solid #b996b8;
+}
+
+/* 기타 contents 옵션 */
+.gamepage_contents {
+  flex-grow: 1;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 버튼 누름 횟수 정보 텍스트 옵션 */
+.arduino_info {
+  position: absolute;
+  top: 250px;
+  right: 50px;
+  text-align: right;
+  transform: translateY(90px);
+}
+
+.arduino_info p {
+  font-size: 18px;
+  color: #000;
+  margin-top: 10px;
+}
+
+/* '재생' 및 '일시정지' 버튼 스타일 */
+.game_controls {
+  position: absolute;
+  bottom: 120px; /* 기존 100px에서 140px으로 수정하여 더 위로 올림 */
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* 버튼 간 간격 */
+}
+
+.game_controls button {
+  width: 100px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: #ff66b2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.game_controls button:hover {
+  background-color: #ff3385;
+}
+
+/* GamePage.css */
+.gamepage_timebar_group {
+  position: absolute;
+  top: 150px; /* 기존 20px에서 60px으로 수정하여 아래로 내립니다 */
+  right: 50px;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  /* 기존 배경색 및 그림자 삭제 */
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.gamepage_timebar_title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #8e658c;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.gamepage_timebar_background {
+  width: 100%;
+  height: 20px; /* 기존 15px에서 30px으로 수정하여 두께를 두껍게 합니다 */
+  background-color: #efa8d7;
+  border-radius: 15px; /* 두께에 맞게 수정하여 둥근 모서리 유지 */
+  overflow: hidden;
+}
+
+.gamepage_timebar_elapsed {
+  height: 100%;
+  background-color: black;
+  transition: width 0.1s linear;
+}

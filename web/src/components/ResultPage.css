@@ -1,0 +1,48 @@
+/* ResultPage.css */
+
+.resultpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.resultpage h1 {
+  font-size: 40px;
+  color: #52484d;
+  margin-bottom: 16px;
+}
+
+.resultpage h2 {
+  font-size: 32px;
+  color: #6b6968;
+  margin-bottom: 24px; /* 점수와 다음 요소 사이의 간격을 조정 */
+}
+
+.resultpage p {
+  font-size: 19.2px;
+  color: #6b6968;
+  margin-bottom: 32px;
+}
+
+.result_back_button {
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #bcb2d3;
+  border: 3px solid #b490b8;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 32px; /* 버튼과 위 요소 사이의 간격을 넓히기 위해 추가 */
+}
+
+.result_back_button:hover {
+  background-color: #6a5169;
+}

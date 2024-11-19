@@ -1,0 +1,54 @@
+/* http://localhost:3000/practice 페이지 UI 디자인 */
+@import "../default.css";
+
+/* PracticePage 페이지 전체 옵션 */
+.practicepage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: #f5f5f5;
+  position: relative;
+  padding: 0 40px; /* 왼쪽 앨범 커버와 오른쪽 악보 사이 간격 (+ 양끝) */
+}
+
+/* 앨범 커버 전체 옵션 (화면 왼쪽) */
+.album_cover {
+  text-align: center;
+  width: 50%;
+  margin-top: 30px;
+  margin-left: -70px;
+}
+
+.album_cover img {
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.album_cover h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* 악보 표시 영역 (화면 오른쪽) */
+.music_book {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 악보 이미지 스타일 */
+.sheet_image {
+  width: 120%;
+  height: auto;
+  max-width: 700px;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: #fff;
+}

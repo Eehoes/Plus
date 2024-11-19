@@ -1,0 +1,18 @@
+/* 전체 웹페이지 옵션 */
+body,
+html {
+  overflow: hidden;
+  height: 100%; /* 웹페이지 전체 높이 = 100% 꽉 */
+  margin: 0; /* 여백 아예 제거 (0%) */
+  font-family: Arial; /* 글꼴 */
+}
+
+/* 전체 텍스트(라벨) 옵션 */
+label {
+  width: 70px;
+  font-size: 22px;
+  font-weight: bold; /* 텍스트 두껍게 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  margin-left: -70px; /* 텍스트를 왼쪽으로 조금 이동 (마이너스 커질수록 더 이동함) */
+  white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 (안하면 두 줄로 변함) */
+}

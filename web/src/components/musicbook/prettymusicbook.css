@@ -1,0 +1,304 @@
+/* src/components/musicbook/prettymusicbook.css */
+/* 마디별 네모박스로 연주할 부분 표시해주는 css 코드 */
+.musicbook {
+  position: relative;
+}
+
+.imagebox_field {
+  position: relative;
+  display: inline-block;
+}
+
+.sheet_image {
+  width: 100%;
+  height: auto;
+  //max-width: 700px; /* 화면이 커져도 일정 크기 이상 커지지 않도록 제한 */
+}
+
+.red_box {
+  position: absolute;
+  border: 3px solid red;
+  pointer-events: none;
+}
+
+/* 각 마디에 맞는 위치와 크기를 설정해주는 옵션 */
+/* 퍼센트(%) 단위 -> 창 크기에 따라 알맞게 마디(measure) 위치를 조정 */
+
+/* ---------------------------------------------------- */
+/* page1 */
+.measure-1 {
+  top: 40%;
+  left: 14.8%;
+  width: 21%;
+  height: 50%;
+}
+
+.measure-2 {
+  top: 40%;
+  left: 35%;
+  width: 21%;
+  height: 50%;
+}
+
+.measure-3 {
+  top: 40%;
+  left: 54.8%;
+  width: 21%;
+  height: 50%;
+}
+
+.measure-4 {
+  top: 40%;
+  left: 74.5%;
+  width: 21%;
+  height: 50%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page2 */
+.measure-5 {
+  top: 3%;
+  left: 8%;
+  width: 22%;
+  height: 82%;
+}
+
+.measure-6 {
+  top: 3%;
+  left: 31%;
+  width: 22%;
+  height: 82%;
+}
+
+.measure-7 {
+  top: 3%;
+  left: 53%;
+  width: 22%;
+  height: 82%;
+}
+
+.measure-8 {
+  top: 3%;
+  left: 75%;
+  width: 22%;
+  height: 82%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page3 */
+.measure-9 {
+  top: 2%;
+  left: 7%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-10 {
+  top: 2%;
+  left: 29%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-11 {
+  top: 2%;
+  left: 51%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-12 {
+  top: 2%;
+  left: 73%;
+  width: 20%;
+  height: 18%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page4 */
+.measure-13 {
+  top: 2%;
+  left: 7%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-14 {
+  top: 2%;
+  left: 29%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-15 {
+  top: 2%;
+  left: 51%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-16 {
+  top: 2%;
+  left: 73%;
+  width: 20%;
+  height: 18%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page5 */
+.measure-17 {
+  top: 2%;
+  left: 7%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-18 {
+  top: 2%;
+  left: 29%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-19 {
+  top: 2%;
+  left: 51%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-20 {
+  top: 2%;
+  left: 73%;
+  width: 20%;
+  height: 18%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page6 */
+.measure-21 {
+  top: 2%;
+  left: 7%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-22 {
+  top: 2%;
+  left: 29%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-23 {
+  top: 2%;
+  left: 51%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-24 {
+  top: 2%;
+  left: 73%;
+  width: 20%;
+  height: 18%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page7 */
+.measure-25 {
+  top: 2%;
+  left: 7%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-26 {
+  top: 2%;
+  left: 29%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-27 {
+  top: 2%;
+  left: 51%;
+  width: 20%;
+  height: 18%;
+}
+
+.measure-28 {
+  top: 2%;
+  left: 73%;
+  width: 20%;
+  height: 18%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page8 */
+.measure-29 {
+  top: 2%;
+  left: 7%;
+  width: 20%;
+  height: 20%;
+}
+
+.measure-30 {
+  top: 2%;
+  left: 29%;
+  width: 20%;
+  height: 20%;
+}
+
+.measure-31 {
+  top: 2%;
+  left: 51%;
+  width: 20%;
+  height: 20%;
+}
+
+.measure-32 {
+  top: 2%;
+  left: 73%;
+  width: 20%;
+  height: 20%;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* page9 */
+.measure-33 {
+  top: 2%;
+  left: 7%;
+  width: 20%;
+  height: 20%;
+}
+
+.measure-34 {
+  top: 2%;
+  left: 29%;
+  width: 20%;
+  height: 20%;
+}
+
+.measure-35 {
+  top: 2%;
+  left: 51%;
+  width: 20%;
+  height: 20%;
+}
+
+.measure-36 {
+  top: 2%;
+  left: 73%;
+  width: 20%;
+  height: 20%;
+}
+/* ---------------------------------------------------- */

@@ -1,0 +1,17 @@
+/* 돌아가기 버튼의 스타일을 설정하는 코드 */
+
+.goback_button {
+  position: absolute;
+  bottom: 40px;
+  right: 50px;
+  font-size: 30px;
+  font-weight: bold;
+  color: gray;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.goback_button:hover {
+  color: darkgray;
+}

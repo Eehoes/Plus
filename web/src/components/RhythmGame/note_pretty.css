@@ -1,0 +1,27 @@
+/* 사용안함 이제 */
+
+.note_container {
+  position: relative;
+  width: 500px;
+  height: 600px;
+  overflow: hidden; /* 노트가 영역을 넘어가지 않도록 설정 */
+}
+
+.note {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #ff6347;
+}
+
+.note.a {
+  left: 50px; /* a 영역 */
+}
+
+.note.s {
+  left: 200px; /* s 영역 */
+}
+
+.note.d {
+  left: 350px; /* d 영역 */
+}
