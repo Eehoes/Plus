@@ -1,4 +1,3 @@
-// src/components/RhythmGame/game_onepage.js
 import React, { useState, useEffect, useCallback } from "react";
 import "./game_onepage.css";
 import onepageNotes from "./note_onepage";
@@ -46,9 +45,9 @@ const GameOnePage = ({ isPlaying, onGameEnd }) => {
       prevNotes.filter((note) => {
         if (note.position === position) {
           const distance = Math.abs(note.y - targetLineY);
-
           let result = "";
           let points = 0;
+
           if (distance <= 20) {
             result = "Perfect";
             points = 10;
@@ -59,7 +58,6 @@ const GameOnePage = ({ isPlaying, onGameEnd }) => {
             setGoodCount((prev) => prev + 1);
           } else if (distance <= 100) {
             result = "Bad";
-            points = 0;
             setBadCount((prev) => prev + 1);
           } else {
             return true;
@@ -99,10 +97,10 @@ const GameOnePage = ({ isPlaying, onGameEnd }) => {
           .map((note) => ({ ...note, y: note.y + 5 }))
           .filter((note) => {
             if (note.y > bottomLineY) {
-              console.log("Bad - Missed the note");
               setHitResult((prev) => ({ ...prev, [note.position]: "Bad" }));
               setBadCount((prev) => prev + 1);
               setTotalNotes((prevTotal) => prevTotal + 1);
+
               setTimeout(() => {
                 setHitResult((prev) => ({ ...prev, [note.position]: "" }));
               }, 500);
@@ -115,7 +113,7 @@ const GameOnePage = ({ isPlaying, onGameEnd }) => {
     };
 
     if (isPlaying) {
-      setNotes([]);
+      setNotes([]); // 노트 초기화
       onepageNotes.forEach((note) => {
         setTimeout(() => {
           setNotes((prevNotes) => [
@@ -155,19 +153,50 @@ const GameOnePage = ({ isPlaying, onGameEnd }) => {
     badCount,
   ]);
 
-  /* UI 구성 */
+  // WebSocket 처리 및 피에조 센서 신호에 따른 로직 실행
+  useEffect(() => {
+    const ws = new WebSocket("ws://localhost:8081");
+
+    ws.onopen = () => {
+      console.log("WebSocket connected");
+    };
+
+    ws.onmessage = (event) => {
+      const message = event.data.trim();
+      if (message === "CYMBAL") {
+        setIsAKeyPressed(true);
+        checkNoteHit("a"); // a 로직 실행
+        setTimeout(() => setIsAKeyPressed(false), 100);
+      } else if (message === "KICK") {
+        setIsSKeyPressed(true);
+        checkNoteHit("s"); // s 로직 실행
+        setTimeout(() => setIsSKeyPressed(false), 100);
+      } else if (message === "HIGHTOM") {
+        setIsDKeyPressed(true);
+        checkNoteHit("d"); // d 로직 실행
+        setTimeout(() => setIsDKeyPressed(false), 100);
+      }
+    };
+
+    ws.onclose = () => {
+      console.log("WebSocket disconnected");
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, []);
+
   return (
     <div className="onepage_game_container">
       <div
         className="onepage_square1"
         style={{ backgroundColor: isAKeyPressed ? "#c3b1da" : "#afa1d5" }}
       >
-        {/* 기준선 */}
         <div
           className="onepage_horizontal_line"
           style={{ top: `${targetLineY}px` }}
         ></div>
-        {/* 판정 결과 표시 */}
         {hitResult.a && (
           <div
             className="onepage_hit_result"
@@ -190,12 +219,10 @@ const GameOnePage = ({ isPlaying, onGameEnd }) => {
         className="onepage_square2"
         style={{ backgroundColor: isSKeyPressed ? "#ad9cc3" : "#a287b9" }}
       >
-        {/* 기준선 */}
         <div
           className="onepage_horizontal_line"
           style={{ top: `${targetLineY}px` }}
         ></div>
-        {/* 판정 결과 표시 */}
         {hitResult.s && (
           <div
             className="onepage_hit_result"
@@ -218,12 +245,10 @@ const GameOnePage = ({ isPlaying, onGameEnd }) => {
         className="onepage_square3"
         style={{ backgroundColor: isDKeyPressed ? "#dabfdc" : "#c0abc8" }}
       >
-        {/* 기준선 */}
         <div
           className="onepage_horizontal_line"
           style={{ top: `${targetLineY}px` }}
         ></div>
-        {/* 판정 결과 표시 */}
         {hitResult.d && (
           <div
             className="onepage_hit_result"

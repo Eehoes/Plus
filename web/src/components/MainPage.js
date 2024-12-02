@@ -1,5 +1,5 @@
 /* module 불러오기 */
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth"; // Firebase 로그아웃 메서드
 import { auth } from "../index"; // index.js에서 Firebase 인증 객체 가져오기
@@ -7,8 +7,14 @@ import "./MainPage.css";
 
 const drum_icon =
   "https://firebasestorage.googleapis.com/v0/b/capstone-8763b.appspot.com/o/drum_icon.png?alt=media";
+
 const MainPage = () => {
   const navigate = useNavigate("");
+
+  // 이미지 URL을 출력하는 useEffect 추가
+  useEffect(() => {
+    console.log("Image URL:", drum_icon);
+  }, []); // 컴포넌트가 처음 렌더링될 때 실행
 
   // 로그아웃 버튼 클릭 시, Firebase 로그아웃 처리 후 LoginPage로 이동
   const handleLogout = () => {
@@ -33,11 +39,6 @@ const MainPage = () => {
   const handlePractice = () => {
     navigate("/select"); // SelectPage로 이동
   };
-
-  // // 게임하기 버튼을 눌렀을 때 GamePage로
-  // const handleGame= ()=>{
-  //   navigate("/game"); // GamePage로 이동
-  // }
 
   // 게임하기 버튼을 눌렀을 때 GameSelectPage로 이동 (수정된 부분)
   const handleGame = () => {

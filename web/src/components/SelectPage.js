@@ -1,19 +1,16 @@
-// SelectPage.js | 2024.10.30 음악 선택 페이지에서 (/select -> /practice) 음악 데이터 정보 전달 기능 추가
 /* module 불러오기 */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref, getDownloadURL } from "firebase/storage"; // Firebase Storage import
 import "./SelectPage.css";
-/* 노래 & 앨범커버 불러오기 */
 import noSongCover from "../images/no_song_cover.png";
-import prettyCover from "../images/DAY6-예뻤어_cover.png";
-import onepageCover from "../images/DAY6-한 페이지가 될 수 있게_cover.png";
-import smartphonePreview from "../music/DAY6-예뻤어.mp3";
-import hateRodrigoPreview from "../music/DAY6-한 페이지가 될 수 있게.mp3";
 import songPlayerIcon from "../images/song_player.png";
 
 const SelectPage = () => {
   const [selectedSong, setSelectedSong] = useState(null);
   const [audio, setAudio] = useState(null);
+  const [firebasePreviews, setFirebasePreviews] = useState({});
+  const [firebaseCovers, setFirebaseCovers] = useState({});
   const navigate = useNavigate();
 
   // 미리듣기 시작시간 설정 (노래마다 다름, 초 단위 설정)
@@ -22,16 +19,66 @@ const SelectPage = () => {
     onepage_highlight: 57.0,
   };
 
+  // Firebase에서 음원 및 이미지 URL 가져오기
+  useEffect(() => {
+    const fetchFirebaseData = async () => {
+      const storage = getStorage();
+      const audioUrls = {};
+      const coverUrls = {};
+
+      try {
+        // 음원 파일 참조
+        const prettyAudioRef = ref(storage, "DAY6-예뻤어.mp3");
+        const onepageAudioRef = ref(storage, "DAY6-한 페이지가 될 수 있게.mp3");
+
+        // 이미지 파일 참조
+        const prettyImageRef = ref(storage, "예뻤어.png");
+        const onepageImageRef = ref(storage, "Page.png");
+
+        // Firebase Storage에서 음원 URL 가져오기
+        const prettyAudioUrl = await getDownloadURL(prettyAudioRef);
+        const onepageAudioUrl = await getDownloadURL(onepageAudioRef);
+
+        // Firebase Storage에서 이미지 URL 가져오기
+        const prettyImageUrl = await getDownloadURL(prettyImageRef);
+        const onepageImageUrl = await getDownloadURL(onepageImageRef);
+
+        // 음원 URL 저장
+        audioUrls["예뻤어 - DAY6"] = prettyAudioUrl;
+        audioUrls["한페이지가될수있게 - DAY6"] = onepageAudioUrl;
+
+        // 이미지 URL 저장
+        coverUrls["예뻤어 - DAY6"] = prettyImageUrl;
+        coverUrls["한페이지가될수있게 - DAY6"] = onepageImageUrl;
+      } catch (error) {
+        console.error("Error fetching Firebase data:", error);
+      }
+
+      setFirebasePreviews(audioUrls);
+      setFirebaseCovers(coverUrls);
+    };
+
+    fetchFirebaseData();
+  }, []);
+
   // 노래 제목 클릭 시 -> 미리듣기 기능 작동
   const handleSongClick = (song, HighlightStartTime) => {
+    // Firebase에서 URL 가져오기
+    const previewUrl = firebasePreviews[song.title];
+    const coverUrl = firebaseCovers[song.title];
+    if (!previewUrl || !coverUrl) {
+      console.error("Data not available for", song.title);
+      return;
+    }
+
     // 이전에 재생 중인 미리듣기 정지
     if (audio) {
       audio.pause();
       audio.currentTime = 0; // 처음부터 다시 재생
     }
 
-    // mp3 재생파일 실행
-    const newAudio = new Audio(song.preview);
+    // Firebase에서 가져온 mp3 재생
+    const newAudio = new Audio(previewUrl);
     newAudio.currentTime = HighlightStartTime;
 
     setAudio(newAudio);
@@ -43,7 +90,7 @@ const SelectPage = () => {
     }, 30000);
 
     // 선택된 노래 상태 업데이트
-    setSelectedSong(song);
+    setSelectedSong({ ...song, cover: coverUrl, preview: previewUrl });
   };
 
   // 오디오 중지
@@ -101,8 +148,6 @@ const SelectPage = () => {
             handleSongClick(
               {
                 title: "예뻤어 - DAY6",
-                cover: prettyCover,
-                preview: smartphonePreview,
               },
               highlightTimes.pretty_highlight
             )
@@ -124,8 +169,6 @@ const SelectPage = () => {
             handleSongClick(
               {
                 title: "한페이지가될수있게 - DAY6",
-                cover: onepageCover,
-                preview: hateRodrigoPreview,
               },
               highlightTimes.onepage_highlight
             )

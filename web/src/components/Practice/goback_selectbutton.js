@@ -8,7 +8,7 @@ import "./goback_selectbutton.css";
 const GoBackSelectButton = ({ onResetSelection }) => {
   const navigate = useNavigate();
 
-  // '돌아가기' 버튼 기능 함수
+  // '돌아가기' 버튼 클릭 시 실행되는 함수
   const handleGoBack = () => {
     if (typeof onResetSelection === "function") {
       onResetSelection(); // 선택된 노래 정보 초기화

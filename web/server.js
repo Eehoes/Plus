@@ -1,33 +1,37 @@
-const WebSocket = require("ws");
 const { SerialPort } = require("serialport");
-const { ReadlineParser } = require("@serialport/parser-readline");
+const WebSocket = require("ws");
 
-const PORT = 3002; // 웹소켓 포트 번호 설정
+// 아두이노 포트 연결
+const arduinoPort = new SerialPort({
+  path: "COM6", // 아두이노가 연결된 포트 확인 후 수정
+  baudRate: 9600,
+});
 
-// 웹소켓 서버 설정
-const wss = new WebSocket.Server({ port: PORT });
-console.log(`WebSocket server is running on ws://localhost:${PORT}`); // 서버 포트 표시
-
-const port = new SerialPort({ path: "COM3", baudRate: 9600 });
-const parser = port.pipe(new ReadlineParser({ delimiter: "\n" }));
+const wss = new WebSocket.Server({ port: 8081 });
 
 wss.on("connection", (ws) => {
   console.log("WebSocket client connected");
 
-  parser.on("data", (data) => {
-    console.log("Received from Arduino:", data.trim());
+  // 아두이노 데이터 수신
+  arduinoPort.on("data", (data) => {
+    const message = data.toString().trim();
+    console.log(`Received from Arduino: ${message}`); // 디버깅용
 
-    const match = data.match(/\d+/); // 데이터에서 숫자 부분만 추출
-    if (match) {
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(match[0]); // 숫자 부분만 전송
-        }
-      });
-    }
+    // WebSocket 클라이언트로 데이터 전송
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(message); // 클라이언트로 데이터 전송
+      }
+    });
   });
 
   ws.on("close", () => {
     console.log("WebSocket client disconnected");
   });
+
+  ws.on("error", (error) => {
+    console.error("WebSocket error:", error);
+  });
 });
+
+console.log("WebSocket server running on ws://localhost:8081");

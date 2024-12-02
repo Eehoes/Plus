@@ -1,0 +1,13 @@
+{
+    "gameScores": {
+      "testId1": {
+        "userId": "exampleUserId",
+        "songTitle": "예뻤어 - DAY6",
+        "score": 95,
+        "accuracy": 85,
+        "totalNotes": 100,
+        "timestamp": "2024-11-25T12:00:00Z"
+      }
+    }
+  }
+  
